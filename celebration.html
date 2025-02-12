@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celebration!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(to right, #ff69b4, #ff0033);
+            background-size: 100% 100vh;
+            background-position: -100% 0;
+            animation: animate 10s linear infinite;
+            font-family: 'Dancing Script', cursive; /* New font */
+            overflow: hidden;
+            position: relative;
+        }
+        @keyframes animate {
+            100% {
+                background-position: 100% 0;
+            }
+        }
+        h1 {
+            color: #ffffff;
+            font-size: 60px; /* Increased font size */
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Added subtle shadow */
+        }
+        h2 {
+            color: #ffffff;
+            font-size: 40px; /* Increased font size */
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Added subtle shadow */
+        }
+        .emoji-container {
+            font-size: 60px; /* Adjusted font size of container */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 90%;
+        }
+        .heart {
+            margin: 15px; /* Increased margin for breathing space */
+            animation: bounce 3s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2); /* Increased scaling effect */
+            }
+        }
+        .floating-emoji {
+            position: absolute;
+            font-size: 40px;
+            animation: float 8s linear infinite, rotate 8s linear infinite;
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-300px); /* Increased float height */
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Yay! Love is in the air! 💖</h1>
+    <h2>I love you so much! ❤️</h2>
+    <div class="emoji-container">
+        <div class="heart">💖</div>
+        <div class="heart">💘</div>
+        <div class="heart">💝</div>
+        <div class="heart">❤️</div>
+        <div class="heart">😍</div>
+        <div class="heart">😘</div>
+        <div class="heart">🥰</div>
+        <div class="heart">🎉</div>
+        <div class="heart">🌹</div>
+        <div class="heart">✨</div>
+        <div class="heart">🎊</div>
+    </div>
+
+    <script>
+        const emojis = ["😍", "😘", "🥰", "💖", "🎉", "💝", "💞", "💗", "🌹", "✨", "🎊"];
+        const body = document.body;
+
+        function createFloatingEmoji() {
+            const emojiDiv = document.createElement('div');
+            emojiDiv.className = 'floating-emoji';
+            emojiDiv.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+
+            // Set a random position for the emoji
+            const randomX = Math.random() * (window.innerWidth - 50); // -50 to keep it within viewport
+            emojiDiv.style.left = randomX + 'px';
+            
+            // Add to body
+            body.appendChild(emojiDiv);
+
+            // Randomize float animation duration and start position
+            const randomFloatDuration = Math.random() * 5 + 5; // Between 5 and 10 seconds
+            emojiDiv.style.animationDuration = randomFloatDuration + 's';
+            emojiDiv.style.fontSize = (Math.random() * 20 + 40) + 'px'; // Random size between 40px and 60px
+
+            // Remove the emoji after it finishes floating up
+            setTimeout(() => {
+                emojiDiv.remove();
+            }, randomFloatDuration * 1000); // Convert duration to milliseconds
+        }
+
+        // Create emojis every 1 second
+        setInterval(createFloatingEmoji, 1000);
+    </script>
+
+</body>
+</html>
