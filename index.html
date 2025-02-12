@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day Proposal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(to right, #ff69b4, #ff0033);
+            font-family: 'Pacifico', cursive; /* Apply the new font */
+            position: relative;
+            overflow: hidden;
+        }
+        h1 {
+            color: #fff;
+            font-size: 60px; /* Increased font size */
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ff69b4;
+            z-index: 1; /* Keep heading above everything */
+            text-align: center; /* Center the heading */
+            animation: fadeIn 2s; /* Fade in effect */
+        }
+        button {
+            padding: 15px 30px; /* Increased padding */
+            font-size: 20px; /* Increased font size */
+            margin: 15px; /* Increased margin */
+            border: none;
+            border-radius: 10px; /* Rounded corners */
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 1; /* Keep buttons above everything */
+            animation: slideIn 0.5s; /* Slide in effect */
+        }
+        .yes-button {
+            background-color: #ff69b4;
+            color: #fff;
+        }
+        .no-button {
+            background-color: #808080; 
+            color: #fff;
+        }
+        .live-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1; /* Ensure background is behind the text and buttons */
+        }
+        .live-heart {
+            font-size: 200px;
+            position: absolute;
+            animation: floatHeart 5s ease-in-out infinite;
+            opacity: 0.8;
+        }
+        @keyframes floatHeart {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .emoji {
+            position: absolute;
+            font-size: 30px; /* Adjust emoji size here */
+            opacity: 1; /* Fully visible */
+            transition: transform 2s, opacity 2s; /* Transition for float effect */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="live-background">
+        <div class="live-heart" style="animation-delay: 0s;">💖</div>
+        <div class="live-heart" style="animation-delay: -1s;">💖</div>
+        <div class="live-heart" style="animation-delay: -2s;">💖</div>
+        <div class="live-heart" style="animation-delay: -3s;">💖</div>
+        <div class="live-heart" style="animation-delay: -4s;">💖</div>
+        <div class="live-heart" style="animation-delay: -5s;">💖</div>
+    </div>
+
+    <h1>Will you be my Valentine?</h1>
+
+    <button class="yes-button" onclick="window.location.href='celebration.html'">Yes</button>
+    <button class="no-button" id="noButton" onclick="dodge()">No</button>
+
+    <script>
+        const noButton = document.getElementById('noButton');
+
+        function dodge() {
+            const randomX = Math.random() * (window.innerWidth - noButton.offsetWidth);
+            const randomY = Math.random() * (window.innerHeight - noButton.offsetHeight);
+            noButton.style.position = 'absolute';
+            noButton.style.left = randomX + 'px';
+            noButton.style.top = randomY + 'px';
+        }
+
+        function createEmoji() {
+            const emojis = ["😍", "😘", "🥰", "💖", "🎉", "💝", "💞", "💗", "🌹", "✨", "🎊"];
+            const emojiContainer = document.createElement('div');
+            emojiContainer.className = 'emoji';
+            const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+            emojiContainer.innerText = randomEmoji;
+
+            const xPos = Math.random() * window.innerWidth;
+            const yPos = Math.random() * window.innerHeight;
+
+            emojiContainer.style.left = `${xPos}px`;
+            emojiContainer.style.top = `${yPos}px`;
+
+            document.body.appendChild(emojiContainer);
+            
+            // Animate emoji: float up, spin, and fade out
+            setTimeout(() => {
+                emojiContainer.style.transform = 'translateY(-600px) rotate(720deg) scale(1.5)'; // Spin and grow
+                emojiContainer.style.opacity = '0'; // Fade out
+                setTimeout(() => {
+                    emojiContainer.remove(); // Remove after animation
+                }, 2000); // Match with duration of float animation
+            }, 10); // Start animation immediately after being added
+        }
+
+        setInterval(createEmoji, 1000); // Create a new emoji every second
+    </script>
+
+</body>
+</html>
